@@ -3,5 +3,6 @@ class Location < ActiveRecord::Base
   validates :mayor_id, presence: true
   validates :address, presence: true
 
-  belongs_to :user, foreign_key: 'mayor_id'
+  belongs_to :mayor, class_name: 'User', foreign_key: 'mayor_id'
+  has_many :games
 end

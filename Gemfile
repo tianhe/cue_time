@@ -54,5 +54,6 @@ group :development, :test do
   gem 'debugger'
   gem "capybara"
   gem 'shoulda-matchers'
+  gem 'database_cleaner'
 end
 

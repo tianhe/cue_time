@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Game do
   it { should belong_to(:organizer) }
+  it { should belong_to(:location) }
   it { should have_many(:attendances) }
   it { should have_many(:players).through(:attendances) }
 
