@@ -3,7 +3,7 @@ class CreateAttendances < ActiveRecord::Migration
     create_table :attendances do |t|
       t.integer :user_id
       t.integer :game_id
-      t.string :status
+      t.integer :status
 
       t.timestamps
     end

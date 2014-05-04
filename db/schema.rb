@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20140504151358) do
   create_table "attendances", force: true do |t|
     t.integer  "user_id"
     t.integer  "game_id"
-    t.string   "status"
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140504151358) do
     t.string   "gender_requirement"
     t.string   "drinks_requirement"
     t.string   "competitiveness"
-    t.string   "status"
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

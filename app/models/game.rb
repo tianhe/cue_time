@@ -7,6 +7,8 @@ class Game < ActiveRecord::Base
   validates :max_attendance, presence: true  
   validates :location_id, presence: true
 
+  enum status: [:open, :confirmed, :in_progress, :canceled, :completed]
+  
   belongs_to :organizer, class_name: 'User'
   has_many :players, through: :attendances, class_name: 'User'
   has_many :attendances
