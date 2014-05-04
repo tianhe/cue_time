@@ -53,5 +53,6 @@ group :development, :test do
   gem 'debugger-pry', require: 'debugger/pry'
   gem 'debugger'
   gem "capybara"
+  gem 'shoulda-matchers'
 end
 
