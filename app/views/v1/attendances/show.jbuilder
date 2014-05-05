@@ -1,0 +1,1 @@
+json.(@attendance, :game_id, :user_id, :status)

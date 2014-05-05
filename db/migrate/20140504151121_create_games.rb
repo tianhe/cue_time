@@ -13,7 +13,7 @@ class CreateGames < ActiveRecord::Migration
       t.string :gender_requirement
       t.string :drinks_requirement
       t.string :competitiveness
-      t.integer :status
+      t.integer :status, default: 0
 
       t.timestamps
     end
