@@ -1,0 +1,1 @@
+json.(@user, :id, :gender, :birthdate, :email, :name, :drinking_habit)

@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-
-  namespace :v1, defaults: { format: :json } do
-    resources :attendances, only: [:update, :create, :show]
-  end
+  # namespace :api, path: '', constraints: { subdomain: 'api' } do
+    namespace :v1, defaults: { format: :json } do
+      resources :attendances, only: [:update, :create, :show]
+      resources :users,       only: [:update, :create, :show]
+      resources :sessions,    only: [:create]
+    end
+  # end
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

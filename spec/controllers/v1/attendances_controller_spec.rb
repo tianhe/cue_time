@@ -10,7 +10,7 @@ describe V1::AttendancesController do
   describe "POST 'create'" do    
     it "returns http success if parameters are valid" do
       expect {
-        post :create, user_id: user.id, game_id: game.id
+        post :create, user_id: user.id, game_id: game.id, email: user.email, authentication_token: user.authentication_token
         response.should be_success
       }.to change{ Attendance.count }.by(1)
 
@@ -20,7 +20,7 @@ describe V1::AttendancesController do
 
     it "returns 400 if the parameters are invalid" do
       expect {
-        post :create, user_id: 0
+        post :create, user_id: 0, email: user.email, authentication_token: user.authentication_token
         response.code.should == '400'
       }.to_not change{ Attendance.count }
     end
@@ -28,7 +28,7 @@ describe V1::AttendancesController do
 
   describe "GET 'show'" do
     it "returns http success" do
-      get :show, id: attendance.id
+      get :show, id: attendance.id, email: user.email, authentication_token: user.authentication_token
       json = JSON.parse(response.body)
       json.should == { game_id: attendance.game_id, user_id: attendance.user_id, status: attendance.status }.with_indifferent_access
     end
@@ -41,8 +41,10 @@ describe V1::AttendancesController do
 
   describe "PATCH 'update'" do
     it "returns http success" do
-      put :update, id: attendance.id, status: 'confirmed'
+      put :update, id: attendance.id, status: 'confirmed', email: user.email, authentication_token: user.authentication_token
       response.should be_success
+
+      Attendance.first.status.should == 'confirmed'
     end
 
     it "returns 400 if the id doesnt exist" do

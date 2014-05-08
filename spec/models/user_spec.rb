@@ -7,5 +7,8 @@ describe User do
   it { should have_many(:organized_games) }
   it { should have_many(:attending_games) }
 
-  it { should validate_presence_of(:name) }
+  it 'should set an authentication token' do
+    @user = create(:user)
+    @user.authentication_token.should_not == nil
+  end
 end
