@@ -53,4 +53,9 @@ describe V1::AttendancesController do
     end    
   end
 
+  describe "GET 'index'" do
+    pending "returns http success" do
+
+    end
+  end
 end

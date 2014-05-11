@@ -57,4 +57,9 @@ describe V1::LocationsController do
     end    
   end
 
+  describe "GET 'index'" do
+    pending "returns http success" do
+
+    end
+  end
 end

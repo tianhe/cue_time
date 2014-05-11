@@ -60,4 +60,9 @@ describe V1::GamesController do
     end    
   end
 
+  describe "GET 'index'" do
+    pending "returns http success" do
+
+    end
+  end
 end
