@@ -29,6 +29,9 @@ FactoryGirl.define do
 
     name { Faker::Company.name }
     address { Faker::Address.street_address }
+    city { 'New York' }
+    state { 'GA'}
+    zipcode { '10022' }
   end
 end
 

@@ -1,0 +1,1 @@
+json.(@location, :id, :name, :mayor_id, :address, :city, :state, :zipcode)

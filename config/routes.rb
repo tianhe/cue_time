@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   # namespace :api, path: '', constraints: { subdomain: 'api' } do
     namespace :v1, defaults: { format: :json } do
-      resources :attendances, only: [:update, :create, :show]
-      resources :users,       only: [:update, :create, :show]
-      resources :sessions,    only: [:create]
+      resources :attendances,     only: [:update, :create, :show]
+      resources :users,           only: [:update, :create, :show]
+      resources :sessions,        only: [:create]
+      resources :locations,       only: [:update, :create, :show]
+      resources :location_visits, only: [:create]
     end
   # end
 
