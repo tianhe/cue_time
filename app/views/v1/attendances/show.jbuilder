@@ -1,1 +1,1 @@
-json.(@attendance, :game_id, :user_id, :status)
+json.(@attendance, :id, :game_id, :user_id, :status)

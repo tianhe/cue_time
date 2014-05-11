@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :sessions,        only: [:create]
       resources :locations,       only: [:update, :create, :show]
       resources :location_visits, only: [:create]
+      resources :games,           only: [:update, :create, :show]
     end
   # end
 

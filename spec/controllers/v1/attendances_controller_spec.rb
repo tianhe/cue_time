@@ -30,7 +30,7 @@ describe V1::AttendancesController do
     it "returns http success" do
       get :show, id: attendance.id, email: user.email, authentication_token: user.authentication_token
       json = JSON.parse(response.body)
-      json.should == { game_id: attendance.game_id, user_id: attendance.user_id, status: attendance.status }.with_indifferent_access
+      json.should == { id: attendance.id, game_id: attendance.game_id, user_id: attendance.user_id, status: attendance.status }.with_indifferent_access
     end
 
     it "returns 400 if the id doesnt exist" do
