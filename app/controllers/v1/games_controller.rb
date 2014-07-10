@@ -1,15 +1,19 @@
 class V1::GamesController < V1::ApiController
+  before_filter :preprocess_params, only: [:create, :update]
 
   def create
     @game = Game.create game_params
     if @game.persisted?
       render_200
     else
-      render_400(@game.errors.messages) 
+      render_400(@game.errors.messages)
     end
   end
 
-  def show    
+  def show
+  end
+
+  def index
   end
 
   def update
@@ -18,6 +22,11 @@ class V1::GamesController < V1::ApiController
   end
 
   private
+    def preprocess_params
+      params[:competitiveness].downcase! if params[:competitiveness]
+      params[:experience].downcase! if params[:experience]
+      params[:location_id] = Location.find_by(name: params[:location]).try(:id) if params[:location]
+    end
 
     def game_params
       params.permit(:organizer_id, :location_id, :start_time, :end_time, :min_attendance, :max_attendance, :min_age, :max_age, :gender_requirement, :drinks_requirement, :experience_level, :competitiveness, :status)

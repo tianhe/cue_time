@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1, defaults: { format: :json } do
       resources :attendances,     only: [:update, :create, :show]
       resources :users,           only: [:update, :create, :show]
-      resources :sessions,        only: [:create]
+      resources :authentications, only: [:create]
       resources :locations,       only: [:update, :create, :show]
       resources :location_visits, only: [:create]
       resources :games,           only: [:update, :create, :show]

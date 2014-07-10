@@ -25,12 +25,25 @@ describe V1::GamesController do
       new_game.max_attendance.should == 30
     end
 
+    it "assigns location_id if given location" do
+      start_time = (Time.zone.now+1.day).to_s
+      end_time = (Time.zone.now+1.day+2.hours).to_s
+      expect {
+        post :create, organizer_id: user.id, location: location.name, start_time: start_time, end_time: end_time, min_attendance: 1, max_attendance: 30, email: user.email, authentication_token: user.authentication_token
+        response.should be_success
+      }.to change{ Game.count }.by(1)
+
+      new_game = Game.first
+      new_game.location_id.should == location.id
+    end
+
     it "returns 400 if the parameters are invalid" do
       expect {
         post :create, location_id: location.id, min_attendance: 1, max_attendance: 30, email: user.email, authentication_token: user.authentication_token
         response.code.should == '400'
       }.to_not change{ Game.count }
     end
+
   end
 
   describe "GET 'show'" do

@@ -5,7 +5,7 @@ class V1::ApiController < ApplicationController
   def authenticate_user_from_token!
     user = User.find_by_email(params[:email])
     unless user && Devise.secure_compare(user.authentication_token, params[:authentication_token])
-      render_401('unauthorized access') and return
+      render_401(['unauthorized access']) and return
     end
   end
 

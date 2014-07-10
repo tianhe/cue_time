@@ -8,8 +8,10 @@ class Game < ActiveRecord::Base
   validates :max_attendance, presence: true  
 
   enum status: [:open, :confirmed, :in_progress, :canceled, :completed]
-  
-  belongs_to :location  
+  enum competitiveness: [:playground, :jv, :varsity]
+  enum experience_level: [:beginner, :intermediate, :advanced]
+
+  belongs_to :location
   belongs_to :organizer, class_name: 'User', foreign_key: 'organizer_id'
   has_many :players, through: :attendances, class_name: 'User'
   has_many :attendances

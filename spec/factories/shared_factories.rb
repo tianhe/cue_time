@@ -3,9 +3,9 @@ FactoryGirl.define do
   factory :user, aliases: [:mayor, :organizer] do
     email { Faker::Internet.email }
     name { Faker::Name.name }
-    gender "F"
+    gender :male
     birthdate "10/04/1983"
-    drinking_habit "heavily"
+    drinking_habit :light
     password "password"
     password_confirmation { |u| u.password }
   end
@@ -57,9 +57,9 @@ FactoryGirl.define do
     experience_level 1
     max_age 30
     min_age 18
-    gender_requirement "M"
-    drinks_requirement "Heavy"
-    competitiveness "Competitive"
+    gender_requirement "male"
+    drinks_requirement "social"
+    competitiveness 1
     status "open"
   end
 end

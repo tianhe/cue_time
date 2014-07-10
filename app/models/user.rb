@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
   has_many :mayorships, class_name: 'Location', foreign_key: 'mayor_id'
 
   before_save :ensure_authentication_token
+  
+  enum gender: [:male, :female]
+  enum drinking_habit: [:dry, :light, :social, :pro, :alcoholic]
 
 private
 
