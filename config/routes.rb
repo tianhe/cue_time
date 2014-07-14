@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   # namespace :api, path: '', constraints: { subdomain: 'api' } do
     namespace :v1, defaults: { format: :json } do
       resources :attendances,     only: [:update, :create, :show]

@@ -22,7 +22,7 @@ class V1::UsersController < V1::ApiController
   private
     def preprocess_params
       params[:user][:gender].downcase! if params[:user][:gender]
-      params[:user][:drinking_habit].downcase! if params[:user][:drinking_habit]    
+      params[:user][:drinking_habit].downcase! if params[:user][:drinking_habit]
     end
 
     def user_params

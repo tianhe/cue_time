@@ -12,7 +12,7 @@ describe V1::GamesController do
       start_time = (Time.zone.now+1.day).to_s
       end_time = (Time.zone.now+1.day+2.hours).to_s
       expect {
-        post :create, organizer_id: user.id, location_id: location.id, start_time: start_time, end_time: end_time, min_attendance: 1, max_attendance: 30, email: user.email, authentication_token: user.authentication_token
+        post :create, game: { organizer_id: user.id, location_id: location.id, start_time: start_time, end_time: end_time, min_attendance: 1, max_attendance: 30 }, email: user.email, authentication_token: user.authentication_token
         response.should be_success
       }.to change{ Game.count }.by(1)
 
@@ -29,7 +29,7 @@ describe V1::GamesController do
       start_time = (Time.zone.now+1.day).to_s
       end_time = (Time.zone.now+1.day+2.hours).to_s
       expect {
-        post :create, organizer_id: user.id, location: location.name, start_time: start_time, end_time: end_time, min_attendance: 1, max_attendance: 30, email: user.email, authentication_token: user.authentication_token
+        post :create, game: { organizer_id: user.id, location: location.name, start_time: start_time, end_time: end_time, min_attendance: 1, max_attendance: 30 }, email: user.email, authentication_token: user.authentication_token
         response.should be_success
       }.to change{ Game.count }.by(1)
 
@@ -39,7 +39,7 @@ describe V1::GamesController do
 
     it "returns 400 if the parameters are invalid" do
       expect {
-        post :create, location_id: location.id, min_attendance: 1, max_attendance: 30, email: user.email, authentication_token: user.authentication_token
+        post :create, game: { location_id: location.id, min_attendance: 1, max_attendance: 30 }, email: user.email, authentication_token: user.authentication_token
         response.code.should == '400'
       }.to_not change{ Game.count }
     end
@@ -61,14 +61,14 @@ describe V1::GamesController do
 
   describe "PATCH 'update'" do
     it "returns http success" do
-      put :update, id: game.id, status: 'confirmed', email: user.email, authentication_token: user.authentication_token
+      put :update, id: game.id, game: { status: 'confirmed' }, email: user.email, authentication_token: user.authentication_token
       response.should be_success
 
       Game.first.status.should == 'confirmed'
     end
 
     it "returns 400 if the id doesnt exist" do
-      put :update, id: 0, status: 'confirmed'
+      put :update, id: 0, game: { status: 'confirmed' }
       response.code.should == '400'
     end    
   end
