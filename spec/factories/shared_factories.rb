@@ -50,6 +50,7 @@ FactoryGirl.define do
     organizer
     location
     
+    title { Faker::Name.name }
     min_attendance 1
     max_attendance 10
     start_time "2014-05-04 11:11:21"
