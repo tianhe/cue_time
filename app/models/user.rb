@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :organized_games, class_name: 'Game', foreign_key: 'organizer_id'
   has_many :attendances
-  has_many :attending_games, class_name: 'Game', through: :attendance
+  has_many :attending_games, through: :attendances, source: :game
 
   has_one  :player_profile
   has_many :location_visits

@@ -29,9 +29,4 @@ describe V1::LocationVisitsController do
     end
   end
 
-  describe "GET 'index'" do
-    pending "returns http success" do
-
-    end
-  end
 end

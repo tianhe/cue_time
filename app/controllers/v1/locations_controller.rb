@@ -1,4 +1,5 @@
 class V1::LocationsController < V1::ApiController
+  before_filter :find_record, only: [:show, :update]
 
   def create
     @location = Location.create location_params

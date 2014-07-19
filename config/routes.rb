@@ -8,7 +8,13 @@ Rails.application.routes.draw do
       resources :authentications, only: [:create]
       resources :locations,       only: [:update, :create, :show]
       resources :location_visits, only: [:create]
-      resources :games,           only: [:update, :create, :show]
+      resources :games,           only: [:update, :create, :show] do
+        collection do
+          get 'upcoming'
+          get 'going'
+          get 'organizing'
+        end        
+      end
     end
   # end
 

@@ -39,7 +39,7 @@ describe V1::UsersController do
     end
 
     it "returns 400 if the id doesnt exist" do
-      get :show, id: 0, authentication_token: user.authentication_token
+      get :show, id: 0, email: user.email, authentication_token: user.authentication_token
       response.code.should == '400'
     end
   end

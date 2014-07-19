@@ -54,7 +54,7 @@ describe V1::GamesController do
     end
 
     it "returns 400 if the id doesnt exist" do
-      get :show, id: 0
+      get :show, id: 0, email: user.email, authentication_token: user.authentication_token
       response.code.should == '400'
     end
   end
@@ -68,14 +68,43 @@ describe V1::GamesController do
     end
 
     it "returns 400 if the id doesnt exist" do
-      put :update, id: 0, game: { status: 'confirmed' }
+      put :update, id: 0, game: { status: 'confirmed' }, email: user.email, authentication_token: user.authentication_token
       response.code.should == '400'
     end    
   end
 
-  describe "GET 'index'" do
-    pending "returns http success" do
+  describe "GET 'upcoming'" do    
+    let!(:game) { create(:game) }
 
+    it "returns games that user isnt organizing or going to" do
+      get :upcoming, email: user.email, authentication_token: user.authentication_token
+      response.should be_success      
+
+      json = JSON.parse(response.body)
+      json[0].should ==  { id: game.id, organizer_id: game.organizer_id, location_id: game.location_id, min_attendance: game.min_attendance, max_attendance: game.max_attendance, experience_level: game.experience_level, min_age: game.min_age, max_age: game.max_age, gender_requirement: game.gender_requirement, drinks_requirement: game.drinks_requirement, competitiveness: game.competitiveness, status: game.status, start_time: game.start_time.to_s, end_time: game.end_time.to_s }.with_indifferent_access      
+    end
+  end
+
+  describe "GET 'going'" do
+    let!(:attendance) { create(:attendance) }
+
+    it "returns games that user is going to" do
+      get :going, email: attendance.user.email, authentication_token: attendance.user.authentication_token
+      response.should be_success
+      
+      game = attendance.game
+      json = JSON.parse(response.body)
+      json[0].should ==  { id: game.id, organizer_id: game.organizer_id, location_id: game.location_id, min_attendance: game.min_attendance, max_attendance: game.max_attendance, experience_level: game.experience_level, min_age: game.min_age, max_age: game.max_age, gender_requirement: game.gender_requirement, drinks_requirement: game.drinks_requirement, competitiveness: game.competitiveness, status: game.status, start_time: game.start_time.to_s, end_time: game.end_time.to_s }.with_indifferent_access
+    end
+  end
+
+  describe "GET 'organizing'" do
+    it "returns games that user is organizing" do
+      get :organizing, email: game.organizer.email, authentication_token: game.organizer.authentication_token
+      response.should be_success
+
+      json = JSON.parse(response.body)
+      json[0].should ==  { id: game.id, organizer_id: game.organizer_id, location_id: game.location_id, min_attendance: game.min_attendance, max_attendance: game.max_attendance, experience_level: game.experience_level, min_age: game.min_age, max_age: game.max_age, gender_requirement: game.gender_requirement, drinks_requirement: game.drinks_requirement, competitiveness: game.competitiveness, status: game.status, start_time: game.start_time.to_s, end_time: game.end_time.to_s }.with_indifferent_access
     end
   end
 end

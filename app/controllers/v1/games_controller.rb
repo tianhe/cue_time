@@ -1,4 +1,5 @@
 class V1::GamesController < V1::ApiController
+  before_filter :find_record, only: [:show, :update]
   before_filter :preprocess_params, only: [:create, :update]
 
   def create
@@ -13,12 +14,21 @@ class V1::GamesController < V1::ApiController
   def show
   end
 
-  def index
-  end
-
   def update
     @success = @game.update(game_params)
     @success ? render_200 : render_400(['save failed']) 
+  end
+
+  def upcoming
+    @games = Game.all - @user.attending_games - @user.organized_games
+  end
+
+  def going
+    @games = @user.attending_games
+  end
+
+  def organizing
+    @games = @user.organized_games
   end
 
   private
@@ -39,7 +49,7 @@ class V1::GamesController < V1::ApiController
     end
 
     def find_record
-      begin 
+      begin
         @game = Game.find(params[:id])
       rescue
         render_400('record not found')

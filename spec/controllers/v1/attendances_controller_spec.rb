@@ -34,7 +34,7 @@ describe V1::AttendancesController do
     end
 
     it "returns 400 if the id doesnt exist" do
-      get :show, id: 0
+      get :show, id: 0, email: user.email, authentication_token: user.authentication_token
       response.code.should == '400'
     end
   end
@@ -48,14 +48,9 @@ describe V1::AttendancesController do
     end
 
     it "returns 400 if the id doesnt exist" do
-      put :update, id: 0, status: 'confirmed'
+      put :update, id: 0, status: 'confirmed', email: user.email, authentication_token: user.authentication_token
       response.code.should == '400'
     end    
   end
 
-  describe "GET 'index'" do
-    pending "returns http success" do
-
-    end
-  end
 end

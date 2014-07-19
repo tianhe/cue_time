@@ -1,4 +1,5 @@
 class V1::AttendancesController < V1::ApiController
+  before_filter :find_record, only: [:show, :update]
 
   def create
     @attendance = Attendance.create attendance_params

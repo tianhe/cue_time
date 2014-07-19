@@ -1,5 +1,4 @@
 class V1::ApiController < ApplicationController
-  before_filter :find_record, except: :create
   before_filter :authenticate_user_from_token!
 
   def authenticate_user_from_token!
