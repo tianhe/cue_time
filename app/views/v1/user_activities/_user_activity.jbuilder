@@ -1,0 +1,1 @@
+json.(user_activity, :user_id, :activity_id)

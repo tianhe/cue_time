@@ -9,6 +9,10 @@ Rails.application.routes.draw do
       resources :locations,       only: [:create, :update, :show]
       resources :location_visits, only: [:create]
       resources :activities,      only: [:create, :index]
+      
+      resources :user_activities, only: [:create, :index]
+      delete 'user_activities',   to: 'user_activities#destroy'
+
       resources :games,           only: [:create, :update, :show] do
         collection do
           get 'upcoming'

@@ -14,6 +14,11 @@ FactoryGirl.define do
     name { Faker::Name.name }    
   end
 
+  factory :user_activity do
+    user
+    activity
+  end
+
   factory :player_profile do
     user
 
