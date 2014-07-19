@@ -20,21 +20,22 @@ class V1::UsersController < V1::ApiController
     @success ? render_200 : render_400(['save failed']) 
   end
 
-  private
-    def preprocess_params
-      params[:user][:gender].downcase! if params[:user][:gender]
-      params[:user][:drinking_habit].downcase! if params[:user][:drinking_habit]
-    end
+private
 
-    def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :gender, :birthdate, :drinking_habit)
-    end
+  def preprocess_params
+    params[:user][:gender].downcase! if params[:user][:gender]
+    params[:user][:drinking_habit].downcase! if params[:user][:drinking_habit]
+  end
 
-    def find_record
-      begin 
-        @user = User.find(params[:id])
-      rescue
-        render_400(['record not found'])
-      end
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :gender, :birthdate, :drinking_habit)
+  end
+
+  def find_record
+    begin 
+      @user = User.find(params[:id])
+    rescue
+      render_400(['record not found'])
     end
+  end
 end

@@ -18,17 +18,17 @@ class V1::LocationsController < V1::ApiController
     @success ? render_200 : render_400('save failed') 
   end
 
-  private
+private
 
-    def location_params
-      params.permit(:name, :address, :city, :state, :zipcode)
-    end
+  def location_params
+    params.permit(:name, :address, :city, :state, :zipcode)
+  end
 
-    def find_record
-      begin 
-        @location = Location.find(params[:id])
-      rescue
-        render_400('record not found')
-      end
+  def find_record
+    begin 
+      @location = Location.find(params[:id])
+    rescue
+      render_400('record not found')
     end
+  end
 end

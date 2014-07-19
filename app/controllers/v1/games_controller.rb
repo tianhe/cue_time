@@ -31,28 +31,29 @@ class V1::GamesController < V1::ApiController
     @games = @user.organized_games
   end
 
-  private
-    def preprocess_params
-      params[:game][:competitiveness].downcase! if params[:game][:competitiveness]
-      params[:game][:experience_level].downcase! if params[:game][:experience_level]
+private
 
-      if params[:game][:location]
-        params[:game][:location_id] = Location.where(name: params[:game][:location]).first_or_create.id
-        params[:game].delete(:location)
-      end
+  def preprocess_params
+    params[:game][:competitiveness].downcase! if params[:game][:competitiveness]
+    params[:game][:experience_level].downcase! if params[:game][:experience_level]
 
-      params[:game][:organizer_id] = @user.id
+    if params[:game][:location]
+      params[:game][:location_id] = Location.where(name: params[:game][:location]).first_or_create.id
+      params[:game].delete(:location)
     end
 
-    def game_params
-      params.require(:game).permit(:organizer_id, :title, :location_id, :start_time, :end_time, :min_attendance, :max_attendance, :min_age, :max_age, :gender_requirement, :drinks_requirement, :experience_level, :competitiveness, :status)
-    end
+    params[:game][:organizer_id] = @user.id
+  end
 
-    def find_record
-      begin
-        @game = Game.find(params[:id])
-      rescue
-        render_400('record not found')
-      end
+  def game_params
+    params.require(:game).permit(:organizer_id, :title, :location_id, :start_time, :end_time, :min_attendance, :max_attendance, :min_age, :max_age, :gender_requirement, :drinks_requirement, :experience_level, :competitiveness, :status)
+  end
+
+  def find_record
+    begin
+      @game = Game.find(params[:id])
+    rescue
+      render_400('record not found')
     end
+  end
 end

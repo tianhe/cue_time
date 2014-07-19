@@ -9,9 +9,9 @@ class V1::LocationVisitsController < V1::ApiController
     end
   end
 
-  private
+private
 
-    def location_visit_params
-      params.permit(:location_id, :user_id, :visit_time)
-    end
+  def location_visit_params
+    params.permit(:location_id, :user_id, :visit_time)
+  end
 end
