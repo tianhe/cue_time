@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   # namespace :api, path: '', constraints: { subdomain: 'api' } do
     namespace :v1, defaults: { format: :json } do
-      resources :attendances,     only: [:update, :create, :show]
-      resources :users,           only: [:update, :create, :show]
+      resources :attendances,     only: [:create, :update, :show]
+      resources :users,           only: [:create, :update, :show]
       resources :authentications, only: [:create]
-      resources :locations,       only: [:update, :create, :show]
+      resources :locations,       only: [:create, :update, :show]
       resources :location_visits, only: [:create]
-      resources :games,           only: [:update, :create, :show] do
+      resources :activities,      only: [:create, :index]
+      resources :games,           only: [:create, :update, :show] do
         collection do
           get 'upcoming'
           get 'going'

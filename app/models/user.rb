@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
 
   validates :email, presence: true
 
+  has_many :user_activities
+  has_many :activities, through: :user_activities
+
   has_many :organized_games, class_name: 'Game', foreign_key: 'organizer_id'
   has_many :attendances
   has_many :attending_games, through: :attendances, source: :game

@@ -9,9 +9,11 @@ FactoryGirl.define do
     password "password"
     password_confirmation { |u| u.password }
   end
-end
 
-FactoryGirl.define do
+  factory :activity do
+    name { Faker::Name.name }    
+  end
+
   factory :player_profile do
     user
 

@@ -1,0 +1,1 @@
+json.array! @activities, partial: 'v1/activities/activity', as: :activity
