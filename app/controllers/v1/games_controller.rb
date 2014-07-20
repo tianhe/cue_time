@@ -46,7 +46,7 @@ private
   end
 
   def game_params
-    params.require(:game).permit(:organizer_id, :title, :location_id, :start_time, :end_time, :min_attendance, :max_attendance, :min_age, :max_age, :gender_requirement, :drinks_requirement, :experience_level, :competitiveness, :status)
+    params.require(:game).permit(:organizer_id, :title, :location_id, :start_time, :end_time, :min_attendance, :max_attendance, :min_age, :max_age, :gender_requirement, :drinks_requirement, :experience_level, :competitiveness, :status, :size)
   end
 
   def find_record

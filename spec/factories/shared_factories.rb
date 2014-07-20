@@ -34,6 +34,7 @@ FactoryGirl.define do
   factory :location do
     mayor
 
+    neighborhood { 'Upper West Side' }
     name { Faker::Company.name }
     address { Faker::Address.street_address }
     city { 'New York' }
@@ -56,10 +57,10 @@ FactoryGirl.define do
   factory :game do
     organizer
     location
-    
+    activity
+
     title { Faker::Name.name }
-    min_attendance 1
-    max_attendance 10
+    size 10
     start_time "2014-05-04 11:11:21"
     end_time "2014-05-04 11:11:21"
     experience_level 1

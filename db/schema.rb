@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140719200151) do
+ActiveRecord::Schema.define(version: 20140720203511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,8 +62,6 @@ ActiveRecord::Schema.define(version: 20140719200151) do
   end
 
   create_table "games", force: true do |t|
-    t.integer  "min_attendance"
-    t.integer  "max_attendance"
     t.integer  "organizer_id"
     t.datetime "start_time"
     t.datetime "end_time"
@@ -79,6 +77,7 @@ ActiveRecord::Schema.define(version: 20140719200151) do
     t.datetime "updated_at"
     t.string   "title"
     t.integer  "activity_id"
+    t.integer  "size"
   end
 
   create_table "location_visits", force: true do |t|
@@ -98,6 +97,7 @@ ActiveRecord::Schema.define(version: 20140719200151) do
     t.string   "zipcode"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "neighborhood"
   end
 
   create_table "player_profiles", force: true do |t|

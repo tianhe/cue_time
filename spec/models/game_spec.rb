@@ -11,7 +11,6 @@ describe Game do
   it { should validate_presence_of(:start_time) }
   it { should validate_presence_of(:end_time) }
   it { should validate_presence_of(:location_id) }
-  it { should validate_presence_of(:min_attendance) }
-  it { should validate_presence_of(:max_attendance) }
+  it { should validate_presence_of(:size) }
   it { should validate_presence_of(:status) }
 end

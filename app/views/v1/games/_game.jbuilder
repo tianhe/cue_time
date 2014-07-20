@@ -1,3 +1,6 @@
-json.(game, :id, :organizer_id, :title, :location_id, :min_attendance, :max_attendance, :experience_level, :min_age, :max_age, :gender_requirement, :drinks_requirement, :competitiveness, :status)
+json.(game, :id, :title, :location_id, :size, :experience_level, :min_age, :max_age, :gender_requirement, :drinks_requirement, :competitiveness, :status)
+json.neighborhood(game.location.neighborhood)
+json.organizer_name(game.organizer.name)
+json.activity_name(game.activity.name)
 json.start_time(game.start_time.strftime("%Y-%m-%d %H:%M:%S %Z"))
 json.end_time(game.start_time.strftime("%Y-%m-%d %H:%M:%S %Z"))
