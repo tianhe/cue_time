@@ -5,7 +5,8 @@ class Game < ActiveRecord::Base
   validates :start_time, presence: true
   validates :end_time, presence: true
   validates :size, presence: true
-
+  validates :activity_id, presence: true
+  
   enum status: [:open, :confirmed, :in_progress, :canceled, :completed]
   enum competitiveness: [:playground, :jv, :varsity]
   enum experience_level: [:beginner, :intermediate, :advanced]

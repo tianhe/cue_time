@@ -1,4 +1,4 @@
-json.(game, :id, :title, :location_id, :size, :experience_level, :min_age, :max_age, :gender_requirement, :drinks_requirement, :competitiveness, :status)
+json.(game, :id, :title, :size, :experience_level, :min_age, :max_age, :gender_requirement, :drinks_requirement, :competitiveness, :status)
 json.neighborhood(game.location.neighborhood)
 json.organizer_name(game.organizer.name)
 json.activity_name(game.activity.name)

@@ -28,7 +28,7 @@ class V1::GamesController < V1::ApiController
   end
 
   def organizing
-    @games = @user.organized_games
+    @games = @user.organized_games.order("created_at DESC")
   end
 
 private
@@ -36,17 +36,22 @@ private
   def preprocess_params
     params[:game][:competitiveness].downcase! if params[:game][:competitiveness]
     params[:game][:experience_level].downcase! if params[:game][:experience_level]
-
+    
     if params[:game][:location]
       params[:game][:location_id] = Location.where(name: params[:game][:location]).first_or_create.id
       params[:game].delete(:location)
+    end
+
+    if params[:game][:activity]
+      params[:game][:activity_id] = Activity.where(name: params[:game][:activity]).first_or_create.id
+      params[:game].delete(:activity)
     end
 
     params[:game][:organizer_id] = @user.id
   end
 
   def game_params
-    params.require(:game).permit(:organizer_id, :title, :location_id, :start_time, :end_time, :min_attendance, :max_attendance, :min_age, :max_age, :gender_requirement, :drinks_requirement, :experience_level, :competitiveness, :status, :size)
+    params.require(:game).permit(:organizer_id, :title, :activity_id, :activity, :neighborhood, :location_id, :start_time, :end_time, :min_attendance, :max_attendance, :min_age, :max_age, :gender_requirement, :drinks_requirement, :experience_level, :competitiveness, :status, :size)
   end
 
   def find_record
