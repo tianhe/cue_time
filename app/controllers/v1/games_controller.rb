@@ -1,5 +1,5 @@
 class V1::GamesController < V1::ApiController
-  before_filter :find_record, only: [:show, :update]
+  before_filter :find_record, only: [:show, :update, :destroy]
   before_filter :preprocess_params, only: [:create, :update]
 
   def create
@@ -12,6 +12,16 @@ class V1::GamesController < V1::ApiController
   end
 
   def show
+  end
+
+  def destroy
+    if @game.organizer_id == @user.id && @game.destroy
+      render_200
+    elsif @game.organizer_id != @user.id
+      render_400('unauthorized action')
+    else
+      render_400(@game.errors.full_messages)
+    end
   end
 
   def update

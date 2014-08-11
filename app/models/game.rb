@@ -16,5 +16,5 @@ class Game < ActiveRecord::Base
   belongs_to :activity
   
   has_many :players, through: :attendances, class_name: 'User'
-  has_many :attendances
+  has_many :attendances, dependent: :destroy
 end

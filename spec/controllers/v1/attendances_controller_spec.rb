@@ -52,5 +52,4 @@ describe V1::AttendancesController do
       response.code.should == '400'
     end    
   end
-
 end

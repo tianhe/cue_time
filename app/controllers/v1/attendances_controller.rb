@@ -18,6 +18,11 @@ class V1::AttendancesController < V1::ApiController
     @success ? render_200 : render_400('save failed') 
   end
 
+  def destroy
+    @success = @attendance.destroy
+    @success ? render_200 : render_400('destroy failed') 
+  end
+
   private
 
     def attendance_params

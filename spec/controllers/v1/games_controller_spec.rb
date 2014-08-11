@@ -120,4 +120,16 @@ describe V1::GamesController do
       json[0].should == { id: game.id, title: game.title, size: game.size, experience_level: game.experience_level, min_age: game.min_age, max_age: game.max_age, gender_requirement: game.gender_requirement, drinks_requirement: game.drinks_requirement, competitiveness: game.competitiveness, status: game.status, neighborhood: game.location.neighborhood, organizer_name: game.organizer.name, activity_name: game.activity.name, start_time: game.start_time.to_s, end_time: game.end_time.to_s }.with_indifferent_access
     end
   end
+
+  describe "DESTROY" do
+    it "destroys game that user is organizing" do
+      delete :destroy, id: game.id, email: game.organizer.email, authentication_token: game.organizer.authentication_token
+      response.should be_success
+    end
+
+    it "returns 400 if the user isn't the organizer" do
+      delete :destroy, id: game.id, email: user.email, authentication_token: user.authentication_token
+      response.code.should == '400'
+    end
+  end
 end

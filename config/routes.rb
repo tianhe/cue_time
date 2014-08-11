@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       resources :user_activities, only: [:create, :index]
       delete 'user_activities',   to: 'user_activities#destroy'
 
-      resources :games,           only: [:create, :update, :show] do
+      resources :games,           only: [:create, :update, :show, :destroy] do
         collection do
           get 'upcoming'
           get 'going'
