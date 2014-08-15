@@ -63,7 +63,7 @@ describe V1::GamesController do
     it "returns http success" do
       get :show, id: game.id, email: user.email, authentication_token: user.authentication_token
       json = JSON.parse(response.body)
-      json.should == { id: game.id, title: game.title, size: game.size, experience_level: game.experience_level, min_age: game.min_age, max_age: game.max_age, gender_requirement: game.gender_requirement, drinks_requirement: game.drinks_requirement, competitiveness: game.competitiveness, status: game.status, neighborhood: game.location.neighborhood, organizer_name: game.organizer.name, activity_name: game.activity.name, start_time: game.start_time.to_s, end_time: game.end_time.to_s }.with_indifferent_access
+      json.should == { id: game.id, title: game.title, size: game.size, experience_level: game.experience_level, min_age: game.min_age, max_age: game.max_age, gender_requirement: game.gender_requirement, drinks_requirement: game.drinks_requirement, competitiveness: game.competitiveness, status: game.status, neighborhood: game.location.neighborhood, organizer_name: game.organizer.name, activity_name: game.activity.name, start_time: game.start_time.to_s, end_time: game.end_time.to_s, attendances: [] }.with_indifferent_access
     end
 
     it "returns 400 if the id doesnt exist" do
@@ -94,7 +94,7 @@ describe V1::GamesController do
       response.should be_success      
 
       json = JSON.parse(response.body)
-      json[0].should == { id: game.id, title: game.title, size: game.size, experience_level: game.experience_level, min_age: game.min_age, max_age: game.max_age, gender_requirement: game.gender_requirement, drinks_requirement: game.drinks_requirement, competitiveness: game.competitiveness, status: game.status, neighborhood: game.location.neighborhood, organizer_name: game.organizer.name, activity_name: game.activity.name, start_time: game.start_time.to_s, end_time: game.end_time.to_s }.with_indifferent_access
+      json[0].should == { id: game.id, title: game.title, size: game.size, experience_level: game.experience_level, min_age: game.min_age, max_age: game.max_age, gender_requirement: game.gender_requirement, drinks_requirement: game.drinks_requirement, competitiveness: game.competitiveness, status: game.status, neighborhood: game.location.neighborhood, organizer_name: game.organizer.name, activity_name: game.activity.name, start_time: game.start_time.to_s, end_time: game.end_time.to_s, attendances: [] }.with_indifferent_access
     end
   end
 
@@ -107,7 +107,14 @@ describe V1::GamesController do
       
       game = attendance.game
       json = JSON.parse(response.body)
-      json[0].should == { id: game.id, title: game.title, size: game.size, experience_level: game.experience_level, min_age: game.min_age, max_age: game.max_age, gender_requirement: game.gender_requirement, drinks_requirement: game.drinks_requirement, competitiveness: game.competitiveness, status: game.status, neighborhood: game.location.neighborhood, organizer_name: game.organizer.name, activity_name: game.activity.name, start_time: game.start_time.to_s, end_time: game.end_time.to_s }.with_indifferent_access
+      json[0].should == { id: game.id, title: game.title, size: game.size, experience_level: game.experience_level, min_age: game.min_age, max_age: game.max_age, gender_requirement: game.gender_requirement, drinks_requirement: game.drinks_requirement, competitiveness: game.competitiveness, status: game.status, neighborhood: game.location.neighborhood, organizer_name: game.organizer.name, activity_name: game.activity.name, start_time: game.start_time.to_s, end_time: game.end_time.to_s,
+        attendances: [
+          { id: attendance.id,
+            user_id: attendance.user_id,
+            game_id: attendance.game_id,
+            status: attendance.status}
+        ]
+      }.with_indifferent_access
     end
   end
 
@@ -117,7 +124,7 @@ describe V1::GamesController do
       response.should be_success
 
       json = JSON.parse(response.body)
-      json[0].should == { id: game.id, title: game.title, size: game.size, experience_level: game.experience_level, min_age: game.min_age, max_age: game.max_age, gender_requirement: game.gender_requirement, drinks_requirement: game.drinks_requirement, competitiveness: game.competitiveness, status: game.status, neighborhood: game.location.neighborhood, organizer_name: game.organizer.name, activity_name: game.activity.name, start_time: game.start_time.to_s, end_time: game.end_time.to_s }.with_indifferent_access
+      json[0].should == { id: game.id, title: game.title, size: game.size, experience_level: game.experience_level, min_age: game.min_age, max_age: game.max_age, gender_requirement: game.gender_requirement, drinks_requirement: game.drinks_requirement, competitiveness: game.competitiveness, status: game.status, neighborhood: game.location.neighborhood, organizer_name: game.organizer.name, activity_name: game.activity.name, start_time: game.start_time.to_s, end_time: game.end_time.to_s, attendances: [] }.with_indifferent_access
     end
   end
 

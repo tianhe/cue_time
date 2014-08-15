@@ -1,1 +1,1 @@
-json.(@attendance, :id, :game_id, :user_id, :status)
+json.partial! 'v1/attendances/attendance', attendance: @attendance

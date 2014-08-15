@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   # namespace :api, path: '', constraints: { subdomain: 'api' } do
     namespace :v1, defaults: { format: :json } do
-      resources :attendances,     only: [:create, :update, :show]
+      resources :attendances,     only: [:create, :index, :update, :show]
       resources :users,           only: [:create, :update, :show]
       resources :authentications, only: [:create]
       resources :locations,       only: [:create, :update, :show]

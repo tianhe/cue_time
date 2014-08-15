@@ -15,13 +15,16 @@ class V1::GamesController < V1::ApiController
   end
 
   def destroy
-    if @game.organizer_id == @user.id && @game.destroy
+    if @game.organizer_id == @user.id && @game.canceled!
       render_200
     elsif @game.organizer_id != @user.id
       render_400('unauthorized action')
     else
       render_400(@game.errors.full_messages)
     end
+  end
+
+  def attendance
   end
 
   def update

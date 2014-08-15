@@ -1,0 +1,1 @@
+json.array! @attendances, partial: 'v1/attendances/attendance', as: :attendance

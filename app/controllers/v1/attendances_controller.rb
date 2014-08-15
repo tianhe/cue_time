@@ -1,6 +1,10 @@
 class V1::AttendancesController < V1::ApiController
   before_filter :find_record, only: [:show, :update]
 
+  def index
+    @attendances = @user.attendances
+  end
+
   def create
     @attendance = Attendance.create attendance_params
     if @attendance.persisted?
@@ -19,7 +23,7 @@ class V1::AttendancesController < V1::ApiController
   end
 
   def destroy
-    @success = @attendance.destroy
+    @success = @attendance.canceled!
     @success ? render_200 : render_400('destroy failed') 
   end
 
