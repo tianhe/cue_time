@@ -24,9 +24,6 @@ class V1::GamesController < V1::ApiController
     end
   end
 
-  def attendance
-  end
-
   def update
     @success = @game.update(game_params)
     @success ? render_200 : render_400(['save failed']) 

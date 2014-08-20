@@ -105,4 +105,18 @@ describe V1::AttendancesController do
       response.code.should == '400'
     end    
   end
+
+  describe "DELETE 'destroy'" do
+    it "moves attendance to canceled" do
+      delete :destroy, id: attendance.id, email: user.email, authentication_token: user.authentication_token
+      response.should be_success
+
+      Attendance.first.status.should == 'canceled'
+    end
+
+    it "returns 400 if the id doesnt exist" do
+      delete :destroy, id: 0, email: user.email, authentication_token: user.authentication_token
+      response.code.should == '400'
+    end    
+  end
 end

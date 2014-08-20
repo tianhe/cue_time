@@ -1,5 +1,5 @@
 class V1::AttendancesController < V1::ApiController
-  before_filter :find_record, only: [:show, :update]
+  before_filter :find_record, only: [:show, :update, :destroy]
 
   def index
     @attendances = @user.attendances

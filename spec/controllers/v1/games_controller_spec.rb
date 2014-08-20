@@ -131,6 +131,7 @@ describe V1::GamesController do
   describe "DESTROY" do
     it "destroys game that user is organizing" do
       delete :destroy, id: game.id, email: game.organizer.email, authentication_token: game.organizer.authentication_token
+      Game.find(game.id).status.should == 'canceled'
       response.should be_success
     end
 
