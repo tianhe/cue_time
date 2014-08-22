@@ -2,7 +2,7 @@ class V1::AttendancesController < V1::ApiController
   before_filter :find_record, only: [:show, :update, :destroy]
 
   def index
-    @attendances = @user.attendances
+    @attendances = @user.attendances.pending + @user.attendances.confirmed
   end
 
   def create
