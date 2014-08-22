@@ -3,6 +3,7 @@ class V1::GamesController < V1::ApiController
   before_filter :preprocess_params, only: [:create, :update]
 
   def create
+    binding.pry
     @game = Game.create game_params
     if @game.persisted?
       render_200
