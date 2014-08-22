@@ -38,7 +38,7 @@ class V1::GamesController < V1::ApiController
   end
 
   def organizing
-    @games = @user.organized_games.order("created_at DESC")
+    @games = @user.organized_games.order("created_at DESC").open+@user.organized_games.order("created_at DESC").confirmed+@user.organized_games.order("created_at DESC").in_progress
   end
 
 private
