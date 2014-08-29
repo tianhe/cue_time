@@ -10,6 +10,13 @@ FactoryGirl.define do
     password_confirmation { |u| u.password }
   end
 
+  factory :authentication do
+    user
+    provider "facebook"
+    uid { Faker::Code.isbn }
+    access_token { Faker::Code.isbn }
+  end
+
   factory :activity do
     name { Faker::Name.name }    
   end
