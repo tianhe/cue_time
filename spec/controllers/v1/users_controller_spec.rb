@@ -5,31 +5,31 @@ describe V1::UsersController do
 
   let(:user) { create(:user) }
 
-  describe "POST 'create'" do
-    it "returns http success if parameters are valid" do
-      expect {
-        post :create, user: { email: 'joe@schmoe.com', password: 'password', password_confirmation: 'password', name: 'Joe Schmoe', gender: 'male', birthdate: '2014-01-01', drinking_habit: 'social' }
-        response.should be_success
-      }.to change{ User.count }.by(1)
+  # describe "POST 'create'" do
+  #   it "returns http success if parameters are valid" do
+  #     expect {
+  #       post :create, user: { email: 'joe@schmoe.com', password: 'password', password_confirmation: 'password', name: 'Joe Schmoe', gender: 'male', birthdate: '2014-01-01', drinking_habit: 'social' }
+  #       response.should be_success
+  #     }.to change{ User.count }.by(1)
 
-      User.first.email.should == 'joe@schmoe.com'
-      User.first.name.should == 'Joe Schmoe'
-      User.first.gender.should == 'male'
-      User.first.birthdate.should == Date.parse('2014-01-01')
-      User.first.drinking_habit.should == 'social'
-      User.first.authentication_token.should_not == nil      
+  #     User.first.email.should == 'joe@schmoe.com'
+  #     User.first.name.should == 'Joe Schmoe'
+  #     User.first.gender.should == 'male'
+  #     User.first.birthdate.should == Date.parse('2014-01-01')
+  #     User.first.drinking_habit.should == 'social'
+  #     User.first.authentication_token.should_not == nil      
 
-      json = JSON.parse(response.body)
-      json.should == { user: { id: User.first.id, email: User.first.email, authentication_token: User.first.authentication_token }}.with_indifferent_access
-    end
+  #     json = JSON.parse(response.body)
+  #     json.should == { user: { id: User.first.id, email: User.first.email, authentication_token: User.first.authentication_token }}.with_indifferent_access
+  #   end
 
-    it "returns 400 if the parameters are missing" do
-      expect {
-        post :create, user: { email: 'joe@schmoe.com' }
-        response.code.should == '400'
-      }.to_not change{ User.count }
-    end
-  end
+  #   it "returns 400 if the parameters are missing" do
+  #     expect {
+  #       post :create, user: { email: 'joe@schmoe.com' }
+  #       response.code.should == '400'
+  #     }.to_not change{ User.count }
+  #   end
+  # end
 
   describe "GET 'show'" do
     it "returns http success" do

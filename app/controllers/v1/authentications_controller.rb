@@ -22,7 +22,8 @@ private
         user = authentication.user
         authentication.update access_token: fb_user.access_token
       else
-        user = User.create email: fb_user.email, first_name: fb_user.first_name, last_name: fb_user.last_name, gender: fb_user.gender
+        user = User.find_by(email: fb_user.email)
+        user ||= User.create email: fb_user.email, first_name: fb_user.first_name, last_name: fb_user.last_name, gender: fb_user.gender
         user.authentications.create provider: 'facebook', uid: fb_user.identifier, access_token: fb_user.access_token
       end
 

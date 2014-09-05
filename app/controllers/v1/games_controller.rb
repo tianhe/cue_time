@@ -33,13 +33,13 @@ class V1::GamesController < V1::ApiController
     @games = Game.all - @user.attending_games - @user.organized_games
   end
 
-  def going
-    @games = @user.attending_games
-  end
+  # def going
+  #   @games = @user.attending_games
+  # end
 
-  def organizing
-    @games = @user.organized_games.order("created_at DESC").open+@user.organized_games.order("created_at DESC").confirmed+@user.organized_games.order("created_at DESC").in_progress
-  end
+  # def organizing
+  #   @games = @user.organized_games.order("created_at DESC").open+@user.organized_games.order("created_at DESC").confirmed+@user.organized_games.order("created_at DESC").in_progress
+  # end
 
 private
 

@@ -28,11 +28,18 @@ describe V1::AttendancesController do
           activity_name: attendance.game.activity.name, 
           start_time: attendance.game.start_time.to_s, end_time: attendance.game.end_time.to_s,
           attendances: [{
+            id: User.find(attendance.game.organizer_id).attendances.first.id,
+            game_id: attendance.game_id,
+            user_id: attendance.game.organizer_id,
+            status: 'confirmed'
+          }, {
             id: attendance.id,
             game_id: attendance.game_id,
             user_id: attendance.user_id,
             status: attendance.status
-          }]
+          }
+
+          ]
         } 
       }.with_indifferent_access)
     end
@@ -43,10 +50,10 @@ describe V1::AttendancesController do
       expect {
         post :create, user_id: user.id, game_id: game.id, email: user.email, authentication_token: user.authentication_token
         response.should be_success
-      }.to change{ Attendance.count }.by(1)
+      }.to change{ Attendance.count }.by(2)
 
-      Attendance.first.user_id.should == user.id
-      Attendance.first.game_id.should == game.id
+      Attendance.where(user_id: user.id).count.should == 1
+      Attendance.find_by(user_id: user.id).game_id.should == game.id
     end
 
     it "returns 400 if the parameters are invalid" do
@@ -77,6 +84,11 @@ describe V1::AttendancesController do
           activity_name: attendance.game.activity.name, 
           start_time: attendance.game.start_time.to_s, end_time: attendance.game.end_time.to_s,
           attendances: [{
+            id: User.find(attendance.game.organizer_id).attendances.first.id,
+            game_id: attendance.game_id,
+            user_id: attendance.game.organizer_id,
+            status: 'confirmed'
+          },{
             id: attendance.id,
             game_id: attendance.game_id,
             user_id: attendance.user_id,
@@ -111,7 +123,7 @@ describe V1::AttendancesController do
       delete :destroy, id: attendance.id, email: user.email, authentication_token: user.authentication_token
       response.should be_success
 
-      Attendance.first.status.should == 'canceled'
+      Attendance.find(attendance.id).status.should == 'canceled'
     end
 
     it "returns 400 if the id doesnt exist" do

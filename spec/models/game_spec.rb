@@ -13,4 +13,10 @@ describe Game do
   it { should validate_presence_of(:location_id) }
   it { should validate_presence_of(:size) }
   it { should validate_presence_of(:status) }
+
+  it 'should create Attendance record for organizer' do
+    expect { 
+      game = create(:game)
+    }.to change{ Attendance.count }.by(1)
+  end
 end

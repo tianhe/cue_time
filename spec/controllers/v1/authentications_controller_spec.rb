@@ -49,7 +49,7 @@ describe V1::AuthenticationsController do
         email = Faker::Internet.email
         fb_user.should_receive(:identifier).at_least(:once) { 'new_fb_id' }
         fb_user.should_receive(:access_token) { 'newtoken' }
-        fb_user.should_receive(:email) { email }
+        fb_user.should_receive(:email).at_least(:once) { email }
         fb_user.should_receive(:gender) { 'female' }
         fb_user.should_receive(:first_name) { Faker::Name.first_name }
         fb_user.should_receive(:last_name) { Faker::Name.last_name }

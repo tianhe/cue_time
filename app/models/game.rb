@@ -17,4 +17,10 @@ class Game < ActiveRecord::Base
   
   has_many :players, through: :attendances, class_name: 'User'
   has_many :attendances, dependent: :destroy
+
+  after_save :create_organizer_attendance
+
+  def create_organizer_attendance
+    Attendance.create(user_id: organizer_id, game_id: id, status: 'confirmed')
+  end
 end
