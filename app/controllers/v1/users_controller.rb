@@ -3,15 +3,6 @@ class V1::UsersController < V1::ApiController
   skip_before_filter :authenticate_user_from_token!, only: :create
   before_filter :preprocess_params, only: [:create, :update]
 
-  # def create
-  #   @user = User.create user_params
-  #   if @user.persisted?
-  #     render json: { user: { id: @user.id, email: @user.email, authentication_token: @user.authentication_token } }
-  #   else
-  #     render_400(@user.errors.full_messages)
-  #   end    
-  # end
-
   def show
   end
 
