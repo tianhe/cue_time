@@ -30,8 +30,6 @@ group :development, :test do
   gem 'faker'
   gem 'pry'
   gem 'pry-remote'
-  gem 'debugger-pry', require: 'debugger/pry'
-  gem 'debugger'
   gem "capybara"
   gem 'shoulda-matchers'
   gem 'database_cleaner'
